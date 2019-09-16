@@ -1,26 +1,32 @@
 package com.practice.imdc.movieservice.model;
 
 
-import com.practice.imdc.movieservice.constants.Genre;
-import java.time.LocalDate;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
+@Entity
+@Table(name="movie")
 public class Movie {
 
-  private int id;
+  @Id
+  @GeneratedValue(strategy= GenerationType.AUTO,generator="native")
+  @GenericGenerator(name = "native",strategy = "native")
+  private Long mid;
+
+  @Column(name="title")
   private String name;
-  private LocalDate releaseDate;
+
+  @Column(name="year")
+  private int releaseYear;
+
+  @Column(name="director")
   private String directorName;
-  private Genre genre;
-  private double rating;
-
-
 
 }

@@ -2,34 +2,31 @@ package com.practice.imdc.movieservice.service;
 
 import com.practice.imdc.movieservice.MovieRestClient;
 import com.practice.imdc.movieservice.constants.DataUtil;
-import com.practice.imdc.movieservice.constants.Genre;
 import com.practice.imdc.movieservice.model.Movie;
-import java.time.LocalDate;
-import java.util.ArrayList;
+import com.practice.imdc.movieservice.repo.MovieRepository;
 import java.util.List;
-import java.util.stream.Collectors;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class MovieServiceImpl implements MovieService {
 
-  @Autowired
-  private MovieRestClient movieRestClient;
+  private final MovieRestClient movieRestClient;
+
+  private final MovieRepository movieRepository;
+
+  public MovieServiceImpl(MovieRestClient movieRestClient,
+      MovieRepository movieRepository) {
+    this.movieRestClient = movieRestClient;
+    this.movieRepository = movieRepository;
+  }
 
 
   @Override
   public List<Movie> getAllMovies() {
-    List<Movie> movies = DataUtil.getMovies();
-    movies.stream()
-        .map(movie -> updateRating(movie))
-        .collect(Collectors.toList());
-    return movies;
+    return movieRepository.findAll();
   }
 
   private Movie updateRating(Movie movie) {
-    Double average = movieRestClient.getMovieRating(movie.getId());
-    movie.setRating(average);
     return movie;
   }
 

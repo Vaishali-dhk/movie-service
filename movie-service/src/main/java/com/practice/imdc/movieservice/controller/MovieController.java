@@ -18,8 +18,12 @@ public class MovieController {
 
   static final String BASE_URL = "/api/service/v1/movie";
 
+  private final MovieService movieService;
+
   @Autowired
-  MovieService movieService;
+  public MovieController(MovieService movieService) {
+    this.movieService = movieService;
+  }
 
 
   @RequestMapping("/getAll")
