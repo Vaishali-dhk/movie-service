@@ -31,12 +31,23 @@ public class MovieServiceImpl implements MovieService {
   }
 
   @Override
-  public Movie getMovieById(int id) {
-    return null;
+  public Movie getMovieById(Long mid) {
+    return movieRepository.findByMid(mid);
   }
 
   @Override
   public Movie save(Movie movie) {
-    return DataUtil.add(movie);
+    return movieRepository.save(movie);
   }
+
+  @Override
+  public Movie updateMovie(Movie movie, Long mid) {
+    return movieRepository.save(movie);
+  }
+
+  @Override
+  public void deleteMovie(Long mid) {
+     movieRepository.deleteById(mid);
+  }
+
 }

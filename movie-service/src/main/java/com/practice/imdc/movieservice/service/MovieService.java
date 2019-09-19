@@ -7,7 +7,11 @@ public interface MovieService {
 
   List<Movie> getAllMovies();
 
-  Movie getMovieById(int id);
+  Movie getMovieById(Long id);
 
   Movie save(Movie movie);
+
+  Movie updateMovie(Movie movie, Long mid);
+
+  void deleteMovie(Long mid);
 }

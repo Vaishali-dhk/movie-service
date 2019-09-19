@@ -7,10 +7,7 @@ import com.practice.imdc.movieservice.model.Movie;
 import com.practice.imdc.movieservice.service.MovieService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(BASE_URL)
@@ -36,10 +33,19 @@ public class MovieController {
     return movieService.save(movie);
   }
 
- /* @RequestMapping("/get/{id}")
-  public Movie getById(@RequestParam("id") int id) {
-    Objects.nonNull(id);
-    return movieService.getMovieById(id);
-  }*/
+  @RequestMapping("/movie/{id}")
+  public Movie getById(@PathVariable("id") Long mid) {
+     return movieService.getMovieById(mid);
+  }
+
+  @PutMapping("/movie/{id}")
+  public Movie updateMovie(@RequestBody Movie movie, @PathVariable("id") Long mid){
+    return movieService.updateMovie(movie, mid);
+  }
+
+  @DeleteMapping("/movie/{id}")
+  public void deleteMovie(@PathVariable("id") Long mid){
+    movieService.deleteMovie(mid);
+  }
 
 }
